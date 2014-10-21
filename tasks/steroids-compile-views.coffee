@@ -55,7 +55,7 @@ module.exports = (grunt)->
 
         # skip "partial" files that begin with underscore
         if /^_/.test path.basename(filePath)
-          yieldedFile = grunt.file.read(filePath, "utf8")
+          yieldedFile = grunt.util._.template(grunt.file.read(filePath, "utf8"))()
         else
 
           controllerName = path.basename(viewDir).replace(path.sep, "")
@@ -68,7 +68,7 @@ module.exports = (grunt)->
             grunt.log.writeln warningMessage
 
           yieldObj =
-            view: grunt.file.read(filePath, "utf8")
+            view: grunt.util._.template(grunt.file.read(filePath, "utf8"))()
             controller: controllerName
 
           # put layout+yields together
